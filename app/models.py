@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import declarative_base, sessionmaker, relationship
 from sqlalchemy.sql import func
-from sqlalchemy import Column, Integer, String, Float, DateTime, ForeignKey
+from sqlalchemy import Column, Integer, String, Float, DateTime, ForeignKey, BigInteger
 from datetime import datetime
 from app.config import DATABASE_URL
 
@@ -37,6 +37,20 @@ class RestakeHistory(Base):
 
     # Back reference from RestakeHistory to RestakeOperation
     restake_operation = relationship("RestakeOperation", back_populates="restake_history")
+
+
+
+class UserModel(Base):
+    __tablename__ = "tbusers"
+    userid = Column(String, primary_key=True, index=True)
+    email = Column(String, unique=True, index=True)
+    userprivatekey = Column(String, unique=True, index=True)
+
+class InvestedModel(Base):
+    __tablename__ = "tbinvested"
+    userid = Column(String, primary_key=True, index=True)
+    investedwei = Column(BigInteger)
+
 
 # Async Engine and Session
 engine = create_async_engine(DATABASE_URL, echo=True)

@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.routers import restake
+from app.routers import invest
 from app.models import init_db
 
 app = FastAPI()
@@ -8,7 +8,7 @@ app = FastAPI()
 async def startup_event():
     await init_db()
 
-app.include_router(restake.router)
+app.include_router(invest.router)
 
 @app.get("/")
 async def root():

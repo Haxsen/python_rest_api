@@ -1,11 +1,11 @@
 import requests
 from app.config import RUST_SERVICE_URL
 
-async def initiate_restake_on_chain(user_id: int, amount: float):
+async def confirm_restake_on_chain(operation_id: int, amount: float):
     try:
         response = requests.post(
-            f"{RUST_SERVICE_URL}/start-restake",
-            json={"user_id": user_id, "amount": amount},
+            f"{RUST_SERVICE_URL}/confirm-restake",
+            json={"operation_id": operation_id, "amount": amount},
             timeout=10
         )
         response.raise_for_status()

@@ -8,7 +8,7 @@ async def record_restake_history(session: AsyncSession, operation_id: int):
     if operation and operation.status == "completed":
         # Create a new RestakeHistory entry
         restake_history = RestakeHistory(
-            restake_operation_id=operation.id,
+            restake_operation_id=operation.operation_id,
             amount=operation.amount,
             status=operation.status,
             completed_at=datetime.utcnow()
